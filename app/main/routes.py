@@ -111,3 +111,48 @@ def coach_detail(coach_id):
         return redirect(url_for('main.coach_detail', coach_id=coach_id))
 
     return render_template('coach_detail.html', coach=coach, form=form)
+
+
+@main.route('/create_player', methods=['GET','POST'])
+@login_required
+def create_player():
+    form = PlayerForm()
+
+    # if form was submitted and contained no errors
+    if form.validate_on_submit():
+        new_player = Player(
+            name=form.name.data,
+            position=form.position.data,
+            team=form.team.data
+        )
+        db.session.add(new_player)
+        db.session.commit()
+
+        flash('New player was created successfully.')
+        return redirect(url_for('main.player_detail', player_id=new_player.id))
+    return render_template('create_player.html', form=form)
+
+@main.route('/players')
+def all_players():
+    all_players = Player.query.all()
+    return render_template('all_players.html', players=all_players)
+
+@main.route('/players/<player_id>', methods=['GET', 'POST'])
+def player_detail(player_id):
+    player = Player.query.get(player_id)
+    form = PlayerForm(obj=player)
+
+    # if form was submitted and contained no errors
+    if form.validate_on_submit():
+        player.name = form.name.data
+        player.wins = form.wins.data
+        player.losses = form.losses.data
+        player.position = form.position.data
+        player.team = form.team.data
+
+        db.session.commit()
+
+        flash('Player was updated successfully.')
+        return redirect(url_for('main.player_detail', player_id=player_id))
+
+    return render_template('player_detail.html', player=player, form=form)

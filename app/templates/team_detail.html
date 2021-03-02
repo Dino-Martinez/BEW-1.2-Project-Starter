@@ -4,9 +4,14 @@
 <p><strong>Win/Loss</strong>: {{ team.wins }} / {{team.losses }}</p>
 
 {% if team.coaches %}
-
 <p>
   <strong>Coaches</strong>: {% for coach in team.coaches %}{{coach.name}}{%
+  endfor %}
+</p>
+{% endif %} {% if team.players %}
+
+<p>
+  <strong>Players</strong>: {% for player in team.players %}<p>{{player.name}}</p>{%
   endfor %}
 </p>
 {% endif %}

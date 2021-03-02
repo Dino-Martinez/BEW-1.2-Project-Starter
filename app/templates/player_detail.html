@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ player.name }}</h1>
+<p><strong>Player position</strong>: {{ player.position }}</p>
+
+<p><strong>Team</strong>: {{player.team}}</p>
+
+<form
+  method="POST"
+  action="{{ url_for('main.player_detail', player_id=player.id) }}"
+>
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Edit this player</legend>
+
+    {{ form.name.label }} {{ form.name }} {{ form.position.label }} {{
+    form.position }} {{form.team.label}} {{form.team}} {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}
