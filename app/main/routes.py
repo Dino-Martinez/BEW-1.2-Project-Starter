@@ -18,8 +18,7 @@ main = Blueprint("main", __name__)
 
 @main.route('/')
 def homepage():
-    all_users = User.query.all()
-    return render_template('home.html', all_users=all_users)
+    return redirect(url_for('main.all_teams'))
 
 @main.route('/teams')
 def all_teams():
@@ -57,7 +56,6 @@ def team_detail(team_id):
         team.name = form.name.data
         team.wins = form.wins.data
         team.losses = form.losses.data
-        team.coach = form.coach.data
 
         db.session.commit()
 
