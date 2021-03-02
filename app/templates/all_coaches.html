@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>Coaches</h2>
+
+<ul>
+  {% for coach in coaches %}
+  <li><a href="/coaches/{{ coach.id }}">{{ coach.name }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

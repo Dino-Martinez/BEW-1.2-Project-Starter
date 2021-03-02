@@ -26,7 +26,7 @@ class Player(db.Model):
     position = db.Column(db.String(80), nullable=False)
 
     # What team this player is on
-    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
     team = db.relationship('Team', back_populates='players')
 
     def __str__(self):
@@ -43,7 +43,7 @@ class Coach(db.Model):
     losses = db.Column(db.Integer, nullable=False)
 
     # What team this player is on
-    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
     team = db.relationship('Team', back_populates='coaches')
 
     def __str__(self):

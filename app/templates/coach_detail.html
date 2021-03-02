@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ coach.name }}</h1>
+<p><strong>Coaching position</strong>: {{ coach.position }}</p>
+
+<p><strong>Win/Loss</strong>: {{ coach.wins }} / {{coach.losses }}</p>
+
+{% if coach.team %}
+<p><strong>Team</strong>: {{coach.team}} {% endif %}</p>
+
+<form
+  method="POST"
+  action="{{ url_for('main.coach_detail', coach_id=coach.id) }}"
+>
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Edit this coach</legend>
+
+    {{ form.name.label }} {{ form.name }} {{ form.position.label }} {{ form.name
+    }} {{ form.wins.label }} {{ form.wins }} {{ form.losses.label }} {{
+    form.losses }} {{form.team.label}} {{form.team}} {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}

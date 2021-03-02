@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Create Coach</h1>
+
+<form action="/create_coach" method="POST">
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Enter the coaches credentials</legend>
+
+    {{ form.name.label }} {{ form.name }}
+    <ul>
+      {% for error in form.name.errors %}
+      <li class="error">{{ error }}</li>
+      {% endfor %}
+    </ul>
+
+    {{ form.position.label }} {{ form.position }}
+    <ul>
+      {% for error in form.position.errors %}
+      <li class="error">{{ error }}</li>
+      {% endfor %}
+    </ul>
+
+    {{ form.wins.label }} {{ form.wins }}
+    <ul>
+      {% for error in form.wins.errors %}
+      <li class="error">{{ error }}</li>
+      {% endfor %}
+    </ul>
+
+    {{ form.losses.label }} {{ form.losses }}
+    <ul>
+      {% for error in form.losses.errors %}
+      <li class="error">{{ error }}</li>
+      {% endfor %}
+    </ul>
+
+    {{ form.team.label }} {{ form.team }}
+    <ul>
+      {% for error in form.team.errors %}
+      <li class="error">{{ error }}</li>
+      {% endfor %}
+    </ul>
+
+    {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}
